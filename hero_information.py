@@ -1,3 +1,10 @@
+#!/usr/bin/python3
+# @Author  : TomTonys
+# @Software: PyCharm
+# @File    : hero_information.py
+# @Time    : 2018/9/10
+# @version : python 3.7
+
 import requests,re,openpyxl
 from time import sleep
 
