@@ -73,7 +73,12 @@ def main():
         hero = hero.split('"')[3]
         response = get_html(hero)
         her_infos = hero_info(response)
-        her.append(her_infos)
+        her_encode = []
+        for i in her_infos:
+            i = i.encode("latin-1").decode("unicode_escape")
+            print(i)
+            her_encode.append(i)
+        her.append(her_encode)
         sleep(1)
         print(hero)
     save_to_excel(her)
