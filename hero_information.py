@@ -9,6 +9,7 @@ import requests
 import re
 import openpyxl
 from time import sleep
+import pymysql
 
 def get_html(hero):
     headers = {
@@ -68,6 +69,29 @@ def save_to_excel(her):
         ws.append(hero)
     wb.save('herotest.xlsx')
 
+def save_to_mysql(her):
+    for i in her:
+        ch = '"' + i[0] + '"'
+        name = '"' + i[1] + '"'
+        bd_name = '"' + i[2] + '"'
+        zd_name = '"' + i[3] + '"'
+        db = pymysql.connect(host='localhost', user='root',
+                             password='123456', database='python_mysql', charset='utf8')
+        cursor = db.cursor()
+        sql = ''' insert into lolheroinfo values (%s, %s, %s, %s);
+        ''' % (ch, name, bd_name, zd_name)
+        # print(sql)
+        try:
+            # 执行sql语句
+            cursor.execute(sql)
+            # 提交到数据库执行
+            db.commit()
+            print(ch, ' insert into success!')
+        except:
+            db.rollback()
+
+        db.close()
+
 def main():
     heros = get_hero()
     her = []
@@ -84,6 +108,7 @@ def main():
         sleep(1)
         print(hero)
     save_to_excel(her)
+    #save_to_mysql(her)
 
 if __name__ == '__main__':
     main()
