@@ -5,7 +5,9 @@
 # @Time    : 2018/9/10
 # @version : python 3.7
 
-import requests,re,openpyxl
+import requests
+import re
+import openpyxl
 from time import sleep
 
 def get_html(hero):
